@@ -397,7 +397,7 @@ if __name__ == "__main__":
         print(f"\nDataset loaded: {len(loader.dicom_files)} files found")
         
         if loader.dicom_files:
-            # Load first file as example
+            
             first_file = loader.dicom_files[0]
             print(f"\nLoading example file: {first_file.name}")
             
