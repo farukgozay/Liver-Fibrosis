@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-01-18T23:34:28.737694",
+  "dataset": "TCGA-LIHC",
+  "  n_patients": 42,
+  "n_features": 23,
+  "feature_names": [
+    "age",
+    "gender",
+    "race",
+    "nash_steatosis_pct",
+    "nash_l_s_ratio",
+    "nash_mean_hu",
+    "nash_std_hu",
+    "nash_heterogeneity",
+    "nash_hepatomegaly",
+    "nash_surface_nodularity",
+    "nash_edge_sharpness",
+    "nash_focal_fat_count",
+    "nash_caudate_ratio",
+    "fft_low_high_ratio",
+    "fft_spectral_entropy",
+    "fft_anisotropy",
+    "fft_nash_signature",
+    "fft_heterogeneity",
+    "fft_low_freq_power",
+    "fft_mid_freq_power",
+    "fft_dominant_freq",
+    "fft_phase_coherence",
+    "fft_spectral_flatness"
+  ],
+  "test_accuracy": 0.3333333333333333,
+  "confusion_matrix": [
+    [
+      5,
+      0,
+      0,
+      0,
+      7
+    ],
+    [
+      3,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      5,
+      0,
+      0,
+      0,
+      5
+    ]
+  ],
+  "feature_type": "REAL",
+  "includes_demographics": true,
+  "demographic_features": [
+    "age",
+    "gender",
+    "race"
+  ]
+}

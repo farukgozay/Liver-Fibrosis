@@ -1,0 +1,186 @@
+🔬 DICOM'DAN FİBROZ SKORUNA KADAR: ADIM ADIM SÜREẒ
+1️⃣ DICOM Yükleme 📁
+Dosya: 
+src/data_processing/dicom_loader.py
+
+Ne yapıyor:
+
+TCIA-LIHC dataset'inden CT görüntülerini yükler
+DICOM formatını okur
+Hounsfield Unit (HU) değerlerine çevirir
+HU = pixel değeri × slope + intercept
+Karaciğer: ~40-70 HU
+Yağ: <40 HU (NASH göstergesi!)
+2️⃣ Feature Extraction - FFT Analizi 🌊
+Dosya: 
+src/feature_extraction/frequency_domain/fft_2d.py
+
+Ne yapıyor:
+
+CT görüntüsüne 2D Fourier Transform uygular
+Frekans domain'e geçer (spatial → frequency)
+10 FFT özelliği çıkarır:
+low_high_ratio: Düşük/yüksek frekans oranı (fibrozda artar)
+spectral_entropy: Frekans dağılımının düzensizliği
+anisotropy: Yönsel asimetri (fibröz doku yönseldir)
+steatosis_frequency_signature: NASH için özel frekans imzası
+heterogeneity: Doku heterojenliği
+Neden önemli: Fibroz doku düzenli paternler oluşturur → FFT bunu yakalar!
+
+3️⃣ Feature Extraction - NASH Detection 🏥
+Dosya: 
+src/feature_extraction/spatial_domain/nash_detection.py
+
+Ne yapıyor:
+
+Karaciğer ve dalak ROI'lerini tespit eder
+10 NASH özelliği çıkarır:
+steatosis_percentage: Yağlanma yüzdesi (HU < 40 pikseller)
+liver_spleen_ratio: Karaciğer/dalak HU oranı (<1.0 = yağlı)
+mean_hu: Ortalama HU (fibrozda azalır)
+hu_std: HU standart sapması (heterojenlik)
+hepatomegaly_score: Karaciğer büyümesi
+surface_nodularity: Yüzey pürüzlülüğü (sirozda artar)
+edge_sharpness: Kenar netliği (NASH'te azalır)
+focal_fat_count: Fokal yağ sayısı
+Neden önemli: NASH = karaciğerde yağ birikimi + inflamasyon → Bu özellikler direkt bunu ölçer!
+
+4️⃣ Demographics Ekleme 👤
+Dosya: cleaned_clinical_data.csv
+
+Ne yapıyor:
+
+Hasta bilgilerini ekler:
+Age (yaş): Fibrozis yaşla artar!
+Gender (cinsiyet): Erkeklerde risk daha yüksek
+Race (ırk): Genetik faktörler
+Pipeline'da: 
+run_complete_pipeline.py
+ bu verileri FFT+NASH ile birleştirir.
+
+5️⃣ Feature Matrix Oluşturma 📊
+Dosya: 
+run_complete_pipeline.py
+ (Step 4)
+
+Ne yapıyor:
+
+23 özelliği birleştirir:
+3 demografik
+10 NASH
+10 FFT
+42 hasta × 23 özellik matrix oluşturur
+results/final_experiment/extracted_features.csv
+'ye kaydeder
+6️⃣ Model Training - XGBoost 🤖
+Dosya: 
+src/models/classical_ml/xgboost_model.py
+
+Ne yapıyor:
+
+Normalization: StandardScaler ile özellikleri normalize eder
+Train-Test Split: %70 train, %30 test (stratified)
+XGBoost Classifier:
+Multi-class classification (F0, F1, F2, F3, F4)
+Gradient boosting ile decision trees eğitir
+Overfitting önlemek için regularization
+Hyperparameters:
+max_depth=7
+learning_rate=0.05
+n_estimators=200
+Nasıl öğreniyor:
+
+Input: 23 özellik
+Output: F0-F4 fibroz skoru
+XGBoost her özelliğin fibroz skorunu ne kadar etkilediğini öğrenir!
+7️⃣ SHAP Explainability 🔍
+Dosya: 
+run_complete_pipeline.py
+ (Step 7)
+
+Ne yapıyor:
+
+SHAP (SHapley Additive exPlanations):
+Her özelliğin TAHMİNE katkısını hesaplar
+"Age neden önemli?" sorusunu yanıtlar
+Global feature importance + local explanations
+Çıktı:
+
+results/shap_analysis/shap_summary_with_demographics.png
+Hangi özellikler en önemli gösterir (Age, NASH features, FFT features)
+8️⃣ Prediction 🎯
+Yeni hasta geldiğinde:
+
+DICOM yükle → CT görüntüsü al
+FFT analiz → 10 frekans özelliği
+NASH detect → 10 spatial özellik
+Demographics → yaş, cinsiyet, ırk
+Normalize → scaler.pkl kullan
+Model predict → xgboost_model.json
+Sonuç: F0-F4 + probability'ler!
+📁 ÖNEMLİ DOSYA RADER:
+Kaynak Kodlar (src/):
+src/
+├── data_processing/
+│   └── dicom_loader.py          ← DICOM → HU conversion
+├── feature_extraction/
+│   ├── frequency_domain/
+│   │   └── fft_2d.py            ← FFT analiz (10 features)
+│   └── spatial_domain/
+│       └── nash_detection.py    ← NASH detection (10 features)
+└── models/
+    └── classical_ml/
+        └── xgboost_model.py     ← XGBoost classifier
+Pipeline Script:
+scripts/
+├── run_complete_pipeline.py     ← ANA PIPELINE (42 hasta)
+└── test_single_patient.py       ← Tek hasta testi
+Sonuçlar (results/):
+results/
+├── final_experiment/
+│   ├── extracted_features.csv   ← 42×23 feature matrix
+│   ├── xgboost_model.json       ← Eğitilmiş model
+│   └── scaler.pkl               ← Normalization parametreleri
+├── shap_analysis/
+│   └── shap_summary_with_demographics.png  ← Feature importance
+└── patient_predictions/
+    └── predictions_vs_ground_truth.csv     ← Actual vs Predicted
+🔬 BİLİMSEL TEMEL:
+Neden FFT?
+
+Fibroz doku düzenli fibröz bantlar oluşturur
+FFT bu periodisite'yi yakalar
+Normal karaciğer: düzensiz doku → düşük frekans
+Fibrotik karaciğer: organize doku → yüksek frekans
+Neden NASH Features?
+
+NASH = yağlanma + inflamasyon
+Steatosis: HU azalır (<40)
+Liver/Spleen ratio: <1.0 = yağlı karaciğer
+Surface nodularity: siroz göstergesi
+Neden Demographics?
+
+Age: Fibrozis yaşla artar (doğal aging)
+Gender: Erkeklerde NASH riski 2× daha yüksek
+Race: Hispanik/Afrikan Amerikan'larda daha yaygın
+🎯 ÖZET AKIŞ:
+DICOM Görüntü
+    ↓
+[DICOM Loader] → HU değerleri
+    ↓
+[FFT Analizi] → 10 frekans özelliği
+    ↓
+[NASH Detection] → 10 spatial özellik
+    ↓
+[Demographics] → yaş, cinsiyet, ırk
+    ↓
+[Feature Matrix] → 42×23 matrix
+    ↓
+[Normalization] → StandardScaler
+    ↓
+[XGBoost Training] → Model öğrenir
+    ↓
+[SHAP Analizi] → Explainability
+    ↓
+[Prediction] → F0-F4 fibroz skoru!
+Tüm süreç bilimsel makalelerle kanıtlanmış medical imaging + machine learning teknikleri kullanıyor! 🔬

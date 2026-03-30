@@ -1,0 +1,43 @@
+diagnoses.submitter_id,diagnoses.ishak_fibrosis_score,demographic.age_at_index,demographic.gender,demographic.race
+TCGA-G3-A7M8,4.0,31.0,male,asian
+TCGA-DD-A11C,0.0,69.0,male,white
+TCGA-DD-A114,3.0,42.0,male,black or african american
+TCGA-G3-A25X,1.0,73.0,male,asian
+TCGA-G3-AAV4,2.0,83.0,female,white
+TCGA-DD-A39X,0.0,78.0,female,white
+TCGA-DD-A11D,4.0,57.0,female,white
+TCGA-DD-A1ED,0.0,68.0,male,white
+TCGA-DD-A4NF,4.0,72.0,male,white
+TCGA-G3-A5SI,4.0,44.0,male,asian
+TCGA-G3-A5SK,4.0,58.0,male,white
+TCGA-DD-A1EL,0.0,23.0,male,black or african american
+TCGA-G3-A5SJ,4.0,59.0,male,white
+TCGA-G3-A25Z,3.0,58.0,male,asian
+TCGA-G3-A3CK,4.0,61.0,male,asian
+TCGA-G3-A3CH,4.0,53.0,male,asian
+TCGA-DD-A1EI,4.0,46.0,male,asian
+TCGA-DD-A3A9,0.0,64.0,female,white
+TCGA-DD-A115,0.0,53.0,male,white
+TCGA-DD-A4NK,0.0,80.0,female,white
+TCGA-DD-A11A,0.0,67.0,male,black or african american
+TCGA-DD-A1EE,4.0,73.0,male,white
+TCGA-DD-A119,0.0,40.0,male,asian
+TCGA-DD-A1EB,0.0,72.0,female,not reported
+TCGA-DD-A3A8,0.0,75.0,male,white
+TCGA-DD-A1EG,1.0,76.0,male,white
+TCGA-DD-A1EA,1.0,68.0,male,asian
+TCGA-DD-A1E9,4.0,70.0,male,white
+TCGA-DD-A4NJ,1.0,54.0,female,white
+TCGA-G3-A7M5,0.0,76.0,male,asian
+TCGA-DD-A3A1,0.0,65.0,male,not reported
+TCGA-G3-A6UC,4.0,65.0,male,white
+TCGA-G3-A3CG,4.0,80.0,male,white
+TCGA-DD-A4NV,0.0,61.0,male,white
+TCGA-DD-A116,2.0,68.0,male,asian
+TCGA-G3-AAV6,0.0,53.0,female,white
+TCGA-DD-A3A0,0.0,70.0,male,white
+TCGA-G3-A25S,4.0,64.0,male,white
+TCGA-DD-A4NA,3.0,67.0,female,white
+TCGA-DD-A1EH,2.0,23.0,male,white
+TCGA-G3-AAUZ,1.0,48.0,male,Unknown
+TCGA-DD-A39V,0.0,77.0,male,white

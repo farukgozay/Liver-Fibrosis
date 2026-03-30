@@ -1,0 +1,15 @@
+{
+  "test_date": "2026-01-18T04:50:42.867752",
+  "dataset": "TCGA-LIHC",
+  "ground_truth_source": "cleaned_clinical_data.csv",
+  "total_patients_with_labels": 53,
+  "matched_patients": 42,
+  "test_type": "SIMULATED",
+  "fibrosis_score_distribution": {
+    "0.0": 20,
+    "1.0": 6,
+    "2.0": 3,
+    "3.0": 5,
+    "4.0": 19
+  }
+}

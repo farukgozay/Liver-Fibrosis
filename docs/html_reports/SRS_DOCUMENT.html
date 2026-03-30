@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srs Document</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background: white;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 2.2em;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 12px;
+            margin: 40px 0 20px 0;
+            page-break-after: avoid;
+        }
+        h1:first-child {
+            margin-top: 0;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 10px;
+            margin: 30px 0 15px 0;
+            page-break-after: avoid;
+        }
+        h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin: 25px 0 12px 0;
+            page-break-after: avoid;
+        }
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+        }
+        pre {
+            background: #f8f8f8;
+            border:1px solid #e0e0e0;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 4px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #333;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 35px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        strong {
+            color: #000;
+            font-weight: 600;
+        }
+        em {
+            font-style: italic;
+            color: #555;
+        }
+        blockquote {
+            border-left: 4px solid #0066cc;
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: #f9f9f9;
+            color: #555;
+            font-style: italic;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 30px 0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #0066cc;
+        }
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            page-break-before: avoid;
+        }
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 0;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            pre, blockquote {
+                page-break-inside: avoid;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 style="border:none; margin:0;">Srs Document</h1>
+        <p style="margin:10px 0 0 0; color:#666;">Ankara Üniversitesi - Bilgisayar Mühendisliği</p>
+    </div>
+    
+    <h1>SOFTWARE REQUIREMENTS SPECIFICATION (SRS)</h1><h2>Karaciğer Fibrozunun BT Görüntülerinden Non-İnvaziv Evrelendirilmesi</h2><p><strong>Öğrenci</strong>: Bülent Tuğrul (22290673)  
+<strong>Kurum</strong>: Ankara Üniversitesi - Bilgisayar Mühendisliği Bölümü  
+<strong>Standart</strong>: IEEE 830-1998 Recommended Practice for Software Requirements Specifications  
+<strong>Tarih</strong>: Ocak 2026  
+<strong>Versiyon</strong>: 1.0</p><p>---</p><h2>1. GİRİŞ</h2><h3>1.1. Araştırmanın Amacı ve Önemi</h3><p>Bu proje, karaciğer fibrozunun evrelendirilmesi işlemini basitleştirmeyi ve invaziv biyopsinin risklerini ortadan kaldırmayı amaçlamaktadır. Karaciğer biyopsisi:
+<ul>
+<li><strong>Enfeksiyon ve kanama riski</strong> taşır</li>
+<li><strong>Hasta konforunu düşürür</strong></li>
+<li>Sadece <strong>küçük bir doku parçasını</strong> gösterir</li>
+<li><strong>Örnekleme hatası</strong> riski vardır</li>
+</ul><p>Sistemimiz, <strong>Bilgisayarlı Tomografi (BT)</strong> görüntülerini işleyerek fibroz evresini (F0'dan F4'e kadar) yüksek doğrulukla tahmin eden, <strong>girişimsel olmayan</strong> ve <strong>yapay zeka destekli</strong> bir karar destek sistemi sunmaktadır.</p><p><strong>Bilimsel Katkı</strong>: Karaciğer yağlanması (steatosis) ve fibroz aynı anda görülen <strong>Non-Alcoholic Steatohepatitis (NASH)</strong> durumlarında, uzamsal alandaki özellikler maskeleme etkisi yaratır. Yani:
+<ul>
+<li><strong>Fibroz</strong>: Hipodens (düşük yoğunluk)</li>
+<li><strong>Yağlanma</strong>: Hiperdens (yüksek yoğunluk)</li>
+<li><strong>Maskeleme Etkisi</strong>: Birbirlerinin sinyalini sönümler → Hasarlı doku sağlam görünür</li>
+</ul><p>Bu sorunu çözmek için, <strong>Uzamsal Domain (Spatial Domain)</strong> ve <strong>Frekans Domain (2D-FFT)</strong> özelliklerini birleştiren <strong>hibrit yaklaşım</strong> sunmaktayız. Bu, literatürdeki önemli bir boşluğu doldurmaktadır.</p><h3>1.2. Araştırma Projesinin Kapsamı</h3><p>Proje, <strong>TCGA-LIHC</strong> veri setinden elde edilen abdominal BT görüntülerinin işlenmesini, ilgili klinik verilerle birl eştirilmesini ve makine öğrenmesi algoritmalarıyla sınıflandırılmasını kapsar.</p><p><strong>Kapsam dahilindeki iş paketleri</strong>:</p><ol>
+<li><strong>Veri Ön İşleme</strong>:</li>
+<ul>
+<li>DICOM formatındaki görüntülerin okunması</li>
+<li>NIFTI formatına dönüştürme</li>
+<li>Normalizasyon ve pencere/seviye ayarlaması</li>
+</ul>
+</ol><ol>
+<li><strong>Segmentasyon</strong>:</li>
+<ul>
+<li>U-Net modeli ile otomatik karaciğer/dalak segmentasyonu</li>
+<li>Gerektiğinde yarı-otomatik düzeltme</li>
+</ul>
+</ol><ol>
+<li><strong>Öznitelik Çıkarımı</strong>:</li>
+<ul>
+<li><strong>Uzamsal Domain</strong>:</li>
+<li>PyRadiomics ile radyomik özellikler (GLCM, GLRLM, GLSZM, GLDM, NGTDM)</li>
+<li>NASH-specific özellikler (HU statistics, morfometri)</li>
+<li>First-order statistics</li>
+<li><strong>Frekans Domain</strong>:</li>
+<li>2D-FFT ile frekans spektrumu analizi</li>
+<li>Düşük/Orta/Yüksek frekans band özellikleri</li>
+<li>Yönlü (directional) frekans özellikleri</li>
+<li>NASH frekans imzası</li>
+</ul>
+</ol><ol>
+<li><strong>Model Eğitimi</strong>:</li>
+<ul>
+<li>XGBoost ile sınıflandırma</li>
+<li>Optuna ile hiperparametre optimizasyonu</li>
+<li>K-katlı çapraz doğrulama</li>
+</ul>
+</ol><ol>
+<li><strong>Açıklanabilirlik (XAI)</strong>:</li>
+<ul>
+<li>SHAP (Shapley Additive Explanations) analizi</li>
+<li>Feature importance ranking</li>
+<li>Model karar süreçlerinin görselleştirilmesi</li>
+</ul>
+</ol><h3>1.3. Tanımlar ve Kısaltmalar</h3><p>| Kısaltma | Açıklama |
+|----------|----------|
+| <strong>BT (CT)</strong> | Bilgisayarlı Tomografi (Computed Tomography) |
+| <strong>NASH</strong> | Non-Alcoholic Steatohepatitis - Alkol almadan karaciğer yağlanması ve iltihabı |
+| <strong>ROI</strong> | Region of Interest - Görüntü üzerinde ilgilenilen bölge (karaciğer dokusu) |
+| <strong>HU</strong> | Hounsfield Unit - BT görüntülerindeki radyodansite (yoğunluk) birimi |
+| <strong>2D-FFT</strong> | İki Boyutlu Hızlı Fourier Dönüşümü (2D Fast Fourier Transform) |
+| <strong>XAI</strong> | Açıklanabilir Yapay Zeka (Explainable AI) |
+| <strong>DICOM</strong> | Digital Imaging and Communications in Medicine |
+| <strong>NIFTI</strong> | Neuroimaging Informatics Technology Initiative (tıbbi görüntü formatı) |
+| <strong>İnvaziv</strong> | Vücut bütünlüğüne müdahale gerektiren (örn: iğne biyopsisi) |
+| <strong>GLCM</strong> | Gray Level Co-occurrence Matrix |
+| <strong>GLRLM</strong> | Gray Level Run Length Matrix |
+| <strong>GLSZM</strong> | Gray Level Size Zone Matrix |
+| <strong>METAVIR</strong> | Fibroz evreleme sistemi (F0-F4) |
+| <strong>SHAP</strong> | SHapley Additive exPlanations |</p><h3>1.4. Belge Yapısına Genel Bakış</h3><p>Bu belge, projenin teknik gereksinimlerini, sistem mimarisini ve beklenen çıktılarını tanımlar:</p><ul>
+<li><strong>Bölüm 2</strong>: Genel proje tanımı, araştırma geçmişi ve problem cümlesi</li>
+<li><strong>Bölüm 3</strong>: İşlevsel ve sistem gereksinimleri</li>
+<li><strong>Bölüm 4</strong>: Sistem mimarisi ve bileşenler</li>
+<li><strong>Bölüm 5</strong>: Doğrulama ve test kriterleri</li>
+<li><strong>Bölüm 6</strong>: Beklenen çıktılar ve performans metrikleri</li>
+</ul><p>---</p><h2>2. GENEL PROJE TANIMI</h2><h3>2.1. Araştırma Geçmişi ve Bağlamı</h3><p>Mevcut literatürde karaciğer fibrozu tespiti çalışmaları çoğunlukla <strong>uzamsal özelliklere</strong> odaklanmaktadır:
+<ul>
+<li>Doku tekstürü (GLCM, GLRLM)</li>
+<li>Yoğunluk istatistikleri (HU değerleri)</li>
+<li>Morfometrik özellikler</li>
+</ul><p><strong>Ancak hastada fibroz ve yağlanma (NASH) aynı anda bulunuyorsa tespit zorlaşmaktadır:</strong></p><pre><code>Fibroz     →  Hipodens (düşük HU)
+Yağlanma   →  Hiperdens (yüksek HU)
+─────────────────────────────────
+Maskeleme  →  Sinyaller birbirini sönümler
+Sonuç      →  Hasarlı doku sağlam görünür
+</code></pre><p><strong>Literatür Boşluğu</strong>: Standart uzamsal metotlar maskeleme etkisini yeterince ele almıyor.</p><p><strong>Çözümümüz</strong>: Frekans domain işleme (2D-FFT) sayesinde:
+<ul>
+<li>Periyodik doku yapıları tespit edilir</li>
+<li>Fibroz bantları frekans spektrumunda görünür</li>
+<li>NASH-related değişiklikler frekans imzası oluşturur</li>
+<li>Maskeleme etkisi aşılır</li>
+</ul><h3>2.2. Problem Cümlesi ve Araştırma Soruları</h3><h4>Problem Cümlesi</h4><p>İnvaziv biyopsi <strong>riskli</strong> ve <strong>hasta konforu düşük</strong> bir yöntemdir. Mevcut görüntü işleme teknikleri <strong>NASH gibi karmaşık hastalıklarda yetersiz</strong>dir, çünkü yağlanma ve fibroz birbirini maskeler.</p><h4>Araştırma Soruları</h4><p><strong>AS1</strong>: BT görüntülerinin frekans bileşenleri (2D-FFT), uzamsal maskeleme etkisine rağmen, fibrozun yapısal bozulmalarını ayırt edebilir mi?</p><p><strong>AS2</strong>: Hibrit öznitelik seti (uzamsal + frekans), tek başına uzamsal özelliklere göre sınıflandırma başarısını ne kadar artırmaktadır?</p><p><strong>AS3</strong>: NASH tespiti için HU-tabanlı steatosis analizi ve frekans domain imzası birlikte kullanıldığında, tanı doğruluğu ne düzeydedir?</p><h3>2.3. Üst Düzey Araştırma Metodolojisi</h3><p>Proje, <strong>sayısal araştırma</strong> ve <strong>test amaçlı yazılım geliştirme</strong> sürecini izler:</p><pre><code>┌─────────────────────────────────────────────────────────────┐
+│  1. VERİ HAZIRLAMA                                          │
+│     • TCGA-LIHC veri setinden hasta seçimi                  │
+│     • DICOM → NIFTI dönüşüm                                 │
+│     • Metadata extraction                                   │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  2. SEGMENTASYON                                            │
+│     • U-Net otomatik segmentasyon                           │
+│     • Liver ROI extraction                                  │
+│     • Spleen ROI extraction (L/S ratio için)                │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  3. ÖZNİTELİK MÜHENDİSLİĞİ (Feature Engineering)           │
+│                                                             │
+│  ┌────────────────────┐        ┌────────────────────┐      │
+│  │ UZAMSAL DOMAIN     │        │ FREKANS DOMAIN     │      │
+│  │                    │        │                    │      │
+│  │ • PyRadiomics      │        │ • 2D-FFT           │      │
+│  │ • NASH features    │        │ • Power spectrum   │      │
+│  │ • HU statistics    │        │ • Frequency bands  │      │
+│  │ • Morphometry      │        │ • Directional feat.│      │
+│  └────────────────────┘        └────────────────────┘      │
+│           ↓                             ↓                   │
+│           └──────────── FUSION ─────────┘                   │
+│                    (100+ features)                          │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  4. MODELLEME                                               │
+│     • XGBoost classifier                                    │
+│     • Hyperparameter optimization (Optuna)                  │
+│     • Multi-class: F0 vs F1 vs F2 vs F3 vs F4              │
+│     • Binary: Significant/Advanced fibrosis                 │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  5. VALİDASYON & AÇIKLANAB İLİRLİK                          │
+│     • K-fold cross validation                               │
+│     • SHAP analysis                                         │
+│     • Metrics: Accuracy, AUC, Sensitivity, Specificity      │
+└─────────────────────────────────────────────────────────────┘
+</code></pre><h3>2.4. Proje Kısıtları ve Varsayımları</h3><h4>Kısıtlar</h4><ol>
+<li><strong>Veri Kısıtı</strong>: TCGA-LIHC açık veri seti kullanılacaktır. Hasta gizliliği nedeniyle sınırlı veri mevcuttur.</li>
+</ol><ol>
+<li><strong>Etiket Kısıtı</strong>: Ground truth fibroz evre bilgisi olmayan hastalar çalışma dışı bırakılacaktır. Yetersiz veri durumunda fibroz sınıfları gruplanabilir (örn: Düşük Risk [F0-F2] vs Yüksek Risk [F3-F4]).</li>
+</ol><ol>
+<li><strong>Hesaplama Kaynakları</strong>: Model eğitimi standart PC donanımıyla gerçekleştirilecektir (GPU opsiyonel).</li>
+</ol><ol>
+<li><strong>Segmentasyon</strong>: Karaciğer segmentasyonu U-Net ile otomatik yapılacak, ancak düşük kaliteli görüntülerde manuel düzeltme gerekebilir.</li>
+</ol><h4>Varsayımlar</h4><ol>
+<li><strong>Veri Doğruluğu</strong>: TCGA veri setindeki patoloji raporları ve evreleme bilgileri doğru kabul edilir.</li>
+</ol><ol>
+<li><strong>BT Kalitesi</strong>: TCIA-LIHC görüntüleri klinik standartlara uygun kalitededir.</li>
+</ol><ol>
+<li><strong>Fibroz-FFT İlişkisi</strong>: Fibroz dokusunun yapısal değişikliklerinin frekans domeninde ayırt edilebilir imzalar oluşturduğu varsayılır.</li>
+</ol><ol>
+<li><strong>Tekrarlanabilirlik</strong>: PyRadiomics ve FFT hesaplamaları deterministik ve tekrarlanabilirdir.</li>
+</ol><h3>2.5. Beklenen Katkılar</h3><h4>Bilimsel Katkılar</h4><ol>
+<li><strong>Yenilikçi Hibrit Yaklaşım</strong>: Uzamsal ve frekans domain özelliklerinin birleştirilmesi</li>
+</ol><ol>
+<li><strong>NASH-Fibroz Maskeleme Çözümü</strong>: Frekans domain analizi ile maskeleme etkisinin aşılması</li>
+</ol><ol>
+<li><strong>Açıklanabilir AI</strong>: SHAP ile model kararlarının klinik olarak yorumlanabilir hale getirilmesi</li>
+</ol><ol>
+<li><strong>Non-invaziv Tanı</strong>: Biyopsi ihtiyacını azaltma potansiyeli</li>
+</ol><h4>Pratik Katkılar</h4><ol>
+<li><strong>Karar Destek Sistemi</strong>: Radyologlara yardımcı olacak otomatik tanı aracı</li>
+</ol><ol>
+<li><strong>Tekrarlanabilir Workflow</strong>: Açık kaynak araçlarla (PyRadiomics, scikit-learn,  XGBoost) kurulabilir sistem</li>
+</ol><ol>
+<li><strong>Hızlı Analiz</strong>: Hasta başına dakikalar içinde sonuç</li>
+</ol><ol>
+<li><strong>Maliyet Azaltımı</strong>: İnvaz iv işlem maliyetlerinin düşürülmesi</li>
+</ol><p>---</p><h2>3. İŞLEVSEL VE SİSTEM GEREKSİNİMLERİ</h2><h3>3.1. Sistem Açıklaması</h3><p>Sistem, ham BT görüntülerini girdi olarak kabul eden ve arka planda işleyerek fibroz evresini sınıflandıran bir mekanizmaya sahiptir.</p><p><strong>Girdi</strong>: DICOM CT görüntüleri  
+<strong>İşlem</strong>: Segmentasyon → Feature Extraction → Classification → Explanation  
+<strong>Çıktı</strong>: Fibroz evresi + SHAP açıklama grafikleri</p><h3>3.2. İşlevsel Gereksinimler</h3><h4>FR1: Veri Akışı ve Dönüşüm</h4>
+<ul>
+<li><strong>FR1.1</strong>: Sistem, DICOM dosyalarını okuyabilmeli</li>
+<li><strong>FR1.2</strong>: DICOM'u NIFTI veya NumPy matrisine dönüştürebilmeli</li>
+<li><strong>FR1.3</strong>: HU (Hounsfield Unit) değerlerine dönüşüm yapabilmeli</li>
+<li><strong>FR1.4</strong>: Window/Level ayarlaması uygulayabilmeli</li>
+</ul><h4>FR2: Bölge Tespiti (Segmentasyon)</h4>
+<ul>
+<li><strong>FR2.1</strong>: U-Net ile otomatik karaciğer segmentasyonu</li>
+<li><strong>FR2.2</strong>: Dalak segmentasyonu (L/S ratio için)</li>
+<li><strong>FR2.3</strong>: Segmentasyon sonuçlarını görselleştirebilme</li>
+<li><strong>FR2.4</strong>: Manuel düzeltme imkanı (opsiyonel)</li>
+</ul><h4>FR3: Hibrit Öznitelik Çıkarımı</h4>
+<ul>
+<li><strong>FR3.1</strong>: <strong>Uzamsal Domain</strong>:</li>
+<li>PyRadiomics entegrasyonu</li>
+<li>GLCM, GLRLM, GLSZM özellikleri</li>
+<li>NASH-specific features (HU, L/S ratio, steatosis %)</li>
+<li><strong>FR3.2</strong>: <strong>Frekans Domain</strong>:</li>
+<li>2D-FFT uygulaması</li>
+<li>Güç spektrumu analizi</li>
+<li>Frequency band özellikleri</li>
+<li>Directional features</li>
+<li><strong>FR3.3</strong>: Feature fusion (uzamsal + frekans)</li>
+</ul><h4>FR4: Sınıflandırma</h4>
+<ul>
+<li><strong>FR4.1</strong>: XGBoost multi-class classification (F0-F4)</li>
+<li><strong>FR4.2</strong>: Binary classification (significant/advanced fibrosis)</li>
+<li><strong>FR4.3</strong>: Probability skorları üretme</li>
+<li><strong>FR4.4</strong>: Confidence intervals</li>
+</ul><h4>FR5: Açıklanabilirlik (XAI)</h4>
+<ul>
+<li><strong>FR5.1</strong>: SHAP değerlerini hesaplama</li>
+<li><strong>FR5.2</strong>: Feature importance ranking</li>
+<li><strong>FR5.3</strong>: Waterfall ve summary plot oluşturma</li>
+<li><strong>FR5.4</strong>: Klinik yorumlenabilir çıktılar</li>
+</ul><h3>3.3. Sistem Bileşenleri</h3><pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    SİSTEM MİMARİSİ                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  1. VERİ YÖNETİMİ KATMANI                             │ │
+│  │     • DICOM Loader                                    │ │
+│  │     • NIFTI Converter                                 │ │
+│  │     • Metadata Manager                                │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                           ↓                                 │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  2. SEGMENTASYON KATMANI                              │ │
+│  │     • U-Net Model                                     │ │
+│  │     • Traditional Segmentation (fallback)             │ │
+│  │     • Post-processing                                 │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                           ↓                                 │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  3. ÖZNİTELİK ÇIKARIM MOTORU                          │ │
+│  │     ┌──────────────┐        ┌──────────────┐          │ │
+│  │     │ Spatial      │        │ Frequency    │          │ │
+│  │     │ - Radiomics  │        │ - FFT 2D     │          │ │
+│  │     │ - NASH Det.  │        │ - Power Spec.│          │ │
+│  │     └──────────────┘        └──────────────┘          │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                           ↓                                 │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  4. SINIFLANDIRMA KATMANI                             │ │
+│  │     • XGBoost Classifier                              │ │
+│  │     • Hyperparameter Optimizer (Optuna)               │ │
+│  │     • Cross-validation                                │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                           ↓                                 │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  5. AÇIKLANAB İLİRLİK KATMANI                          │ │
+│  │     • SHAP Analyzer                                   │ │
+│  │     • Visualization Engine                            │ │
+│  │     • Report Generator                                │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+</code></pre><h3>3.4. Arabirim Gereksinimleri</h3><h4>Kullanıcı Arabirimi</h4>
+<ul>
+<li><strong>Python/Jupyter Notebook</strong> ortamı (araştırma fazı)</li>
+<li>Komut satırı (CLI) arabirimi</li>
+<li>Opsiyonel: Streamlit/Dash web dashboard</li>
+</ul><h4>Programatik Arabirim (API)</h4>
+<pre><code><h1>Example API Usage</h1>
+from main_pipeline import LiverFibrosisPipeline</p><p>pipeline = LiverFibrosisPipeline('data/raw/TCIA-DATASET-DICOM')
+features = pipeline.process_patient('TCGA-DD-A114')
+prediction = pipeline.predict(features)
+pipeline.explain<em>with</em>shap(features)
+</code></pre><h3>3.5. İşlevsel Olmayan Gereksinimler</h3><h4>NFR1: Güvenlik ve Gizlilik</h4>
+<ul>
+<li>Hasta verileri anonim olarak işlenecek</li>
+<li>HIPAA/GDPR uyumluluğu (gerekirse)</li>
+<li>Veri şifreleme (sensitive data için)</li>
+</ul><h4>NFR2: Performans</h4>
+<ul>
+<li><strong>Tek görüntü işleme</strong>: < 30 saniye</li>
+<li><strong>Feature extraction</strong>: < 10 saniye</li>
+<li><strong>Model inference</strong>: < 1 saniye</li>
+<li>Model eğitimi: Makul sürelerde (PC ile < 1 saat)</li>
+</ul><h4>NFR3: Güvenilirlik</h4>
+<ul>
+<li><strong>Tekrarlanabilirlik</strong>: Aynı girdi → Aynı çıktı</li>
+<li><strong>Hata yönetimi</strong>: Graceful degradation (U-Net fail → Traditional segmentation)</li>
+<li><strong>Logging</strong>: Tüm işlemler loglanacak</li>
+</ul><h4>NFR4: Ölçeklenebilirlik</h4>
+<ul>
+<li>Batch processing desteği</li>
+<li>GPU acceleration (opsiyonel)</li>
+<li>Paralel işleme kapasitesi</li>
+</ul><h4>NFR5: Bakım Kolaylığı</h4>
+<ul>
+<li>Modüler kod yapısı</li>
+<li>Detaylı dokümantasyon</li>
+<li>Unit tests</li>
+<li>Versiyon kontrolü (Git)</li>
+</ul><p>---</p><h2>4. DOĞRULAMA VE TEST KRİTERLERİ</h2><h3>4.1. Test Stratejisi</h3><h4>Birim Testleri (Unit Tests)</h4>
+<ul>
+<li>Her modül bağımsız test edilecek</li>
+<li>Mock data ile fonksiyon doğrulaması</li>
+</ul><h4>Entegrasyon Testleri</h4>
+<ul>
+<li>Modüller arası veri akışı testi</li>
+<li>End-to-end pipeline testi</li>
+</ul><h4>Sistem Testleri</h4>
+<ul>
+<li>Gerçek TCIA verisi ile full test</li>
+<li>Performance benchmarking</li>
+</ul><h3>4.2. Başarı Kriterleri</h3><p>| Metrik | Hedef Değer | Açıklama |
+|--------|-------------|----------|
+| <strong>NASH Tespit Doğruluğu</strong> | > 90% | NASH varlığını tespit etme |
+| <strong>Fibroz AUC (F0 vs F1-F4)</strong> | > 0.85 | Fibroz var/yok ayrımı |
+| <strong>Significant Fibrosis (≥F2)</strong> | Sens > 85%, Spec > 80% | Klinik önemli fibroz tespiti |
+| <strong>Advanced Fibrosis (≥F3)</strong> | Sens > 80%, Spec > 85% | İleri evre fibroz tespiti |
+| <strong>Feature Extraction Time</strong> | < 10 sn | Performans kriteri |
+| <strong>Code Coverage</strong> | > 80% | Test kapsamı |</p><p>---</p><h2>5. BEKLENEN ÇIKTILAR</h2><h3>5.1. Yazılım Deliverables</h3><ol>
+<li><strong>Kaynak Kod</strong>: Modüler, dokumentli Python kod tabanı</li>
+<li><strong>Eğitilmiş Model</strong>: XGBoost model dosyası (.pkl)</li>
+<li><strong>Test Sonuçları</strong>: Validation metrics ve raporlar</li>
+<li><strong>Dokümantasyon</strong>: SRS, API docs, user guide</li>
+</ol><h3>5.2. Akademik Çıktılar</h3><ol>
+<li><strong>Bitirme Tezi</strong>: IEEE formatında kapsamlı rapor</li>
+<li><strong>Makale Taslağı</strong>: Konferans/dergi için (opsiyonel)</li>
+<li><strong>Sunum</strong>: PowerPoint/PDF</li>
+</ol><h3>5.3. Görselleştirmeler</h3><ol>
+<li>SHAP summary plots</li>
+<li>ROC curves (multi-class)</li>
+<li>Confusion matrices</li>
+<li>Feature importance charts</li>
+<li>FFT visualizations</li>
+</ol><p>---</p><h2>6. REFERANSLAR</h2><ol>
+<li><strong>Radiomics</strong>: Gille spie, P., et al. "Radiomics: Images Are More than Pictures." <em>Radiology</em>, 2016.</li>
+</ol><ol>
+<li><strong>NASH Detection</strong>: Yoo, J. J., et al. "Non-invasive Assessment of NASH using Machine Learning." <em>Journal of Hepatology</em>, 2023.</li>
+</ol><ol>
+<li><strong>FFT in Medical Imaging</strong>: Smith, A. B., et al. "Frequency Domain Analysis for Tissue Characterization." <em>IEEE TMI</em>, 2024.</li>
+</ol><ol>
+<li><strong>U-Net</strong>: Ronneberger, O., et al. "U-Net: Convolutional Networks for Biomedical Image Segmentation." MICCAI, 2015.</li>
+</ol><ol>
+<li><strong>XGBoost</strong>: Chen, T., & Guestrin, C. "XGBoost: A Scalable Tree Boosting System." KDD, 2016.</li>
+</ol><ol>
+<li><strong>SHAP</strong>: Lundberg, S. M., & Lee, S.-I. "A Unified Approach to Interpreting Model Predictions." NIPS, 2017.</li>
+</ol><p>---</p><p><strong>Belge Sonu</strong></p><p><em>IEEE 830-1998 Standardına Uygun Olarak Hazırlanmıştır</em>
+</p>
+    
+    <div class="footer">
+        <p><strong>Karaciğer Fibrozunun BT Görüntülerinden Non-İnvaziv Evrelendirilmesi</strong></p>
+        <p>Bülent Tuğrul - 22290673 | 2026</p>
+        <p style="font-size:0.85em; margin-top:10px;">Kaynak: docs/SRS_DOCUMENT.md</p>
+    </div>
+</body>
+</html>

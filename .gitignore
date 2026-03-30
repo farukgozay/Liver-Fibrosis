@@ -1,0 +1,28 @@
+# Exclude large/useless files
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.docx
+
+# Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE files
+.vscode/
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data directories (if they contain large datasets)
+TCIA-DATASET-DICOM/
+data/
